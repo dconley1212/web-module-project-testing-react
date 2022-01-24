@@ -41,5 +41,5 @@ test("renders default image when image is not defined", () => {
   const image = screen.queryByAltText(
     "https://i.ibb.co/2FsfXqM/stranger-things.png"
   );
-  expect(image).toBeTruthy();
+  expect(image).toBeInTheDocument();
 });
