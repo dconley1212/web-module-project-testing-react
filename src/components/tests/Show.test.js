@@ -45,11 +45,6 @@ test("handleSelect is called when an season is selected", () => {
       selectedSeason={1}
     />
   );
-  // const selectSeason = screen.queryByLabelText(/select a season/i);
-  // userEvent.click(selectSeason);
-  // const selectedSeason = screen.getAllByTestId("season-option");
-  // userEvent.selectOptions(selectedSeason, { id: 0, name: "Season 1" });
-
   const selectElement = screen.queryByRole("combobox");
   expect(selectElement).toBeInTheDocument();
   const options = screen.getAllByTestId("season-option");
@@ -58,4 +53,16 @@ test("handleSelect is called when an season is selected", () => {
   expect(mockHandleSelect).toHaveBeenCalled();
 });
 
-test("component renders when no seasons are selected and when rerenders with a season passed in", () => {});
+test("component renders when no seasons are selected and when rerenders with a season passed in", () => {
+  const { rerender } = render(
+    <Show show={exampleShowData} selectedSeason={"none"} />
+  );
+
+  let episodes = screen.queryByTestId("episodes-container");
+  expect(episodes).not.toBeInTheDocument;
+
+  rerender(<Show show={exampleShowData} selectedSeason={1} />);
+
+  episodes = screen.queryByTestId("episodes-container");
+  expect(episodes).toBeInTheDocument();
+});
