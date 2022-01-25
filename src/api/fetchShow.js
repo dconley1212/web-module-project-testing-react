@@ -29,8 +29,6 @@ const fetchShow = () => {
       console.log(res);
       const { data } = res;
 
-      console.log(data);
-
       return {
         name: data.name,
         image: data.image,
